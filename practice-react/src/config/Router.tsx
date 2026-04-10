@@ -24,7 +24,8 @@ const routeData = createBrowserRouter([
         path: "/admin", element: <AdminLayout />, children: [
             { index: true, Component: AdminDahboard },
             { path: "users", element: <UserList /> },
-            { path: "user/create", element: <UserRegistration /> }
+            { path: "user/create", element: <UserRegistration /> },
+            { path: "user/userId/detail", element: <>User Detail</> },
         ]
     },
     { path: "*", element: <NotFound /> }
