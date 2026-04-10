@@ -25,7 +25,9 @@ const routeData = createBrowserRouter([
             { index: true, Component: AdminDahboard },
             { path: "users", element: <UserList /> },
             { path: "user/create", element: <UserRegistration /> },
-            { path: "user/userId/detail", element: <>User Detail</> },
+            { path: "user/:id/detail", element: <>User Detail</> },
+            { path: "user/:id", element: <>User Edit form display</> },
+
         ]
     },
     { path: "*", element: <NotFound /> }
