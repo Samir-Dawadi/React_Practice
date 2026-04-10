@@ -1,7 +1,7 @@
 import React from "react"
 
 export interface IButtonProps {
-    disabled?: boolean,
+    disabled?: boolean,      //if desabled is false then the button is clickable , else if it is true the button is not clikable
     className?: string,
     children: React.ReactNode
 }
