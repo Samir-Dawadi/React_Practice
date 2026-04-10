@@ -61,9 +61,11 @@ export default function AdminLayout() {
                 </header>
                 <main className="w-full flex gap-5">
 
-                    {
+                    {/* {
                         (LoggedInUser.role === "admin") ? <AdminSidebar /> : <></>
-                    }
+                    } */}
+
+                    <AdminSidebar LoggedInUser={LoggedInUser} />
 
                     <section className="w-full bg-gray-200 p-3 mt-3 rounded-md">
                         <Outlet />

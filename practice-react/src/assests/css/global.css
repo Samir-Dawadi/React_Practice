@@ -1,1 +1,7 @@
-@import "tailwindcss"
+/* @import "tailwindcss" */
+@import "tailwindcss";
+
+
+.active {
+    background-color: aqua;
+}
