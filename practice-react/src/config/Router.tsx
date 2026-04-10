@@ -9,6 +9,7 @@ import AdminDahboard from "../pages/Admin/Dashboard"
 import UserList from "../pages/Admin/user/UserList"
 import UserRegistration from "../pages/Admin/user/UserRegister"
 import ResetPassword from "../pages/auth/PasswordReset"
+import UserDetail from "../pages/Admin/user/UserDetail"
 
 // import AdminDahboard from "../pages/Admin/Dashboard"
 // import AdminLayout from "../pages/Layouts/AdminLayout"
@@ -25,7 +26,7 @@ const routeData = createBrowserRouter([
             { index: true, Component: AdminDahboard },
             { path: "users", element: <UserList /> },
             { path: "user/create", element: <UserRegistration /> },
-            { path: "user/:id/detail", element: <>User Detail</> },
+            { path: "user/:username/detail", element: <UserDetail /> },
             { path: "user/:id", element: <>User Edit form display</> },
 
         ]
