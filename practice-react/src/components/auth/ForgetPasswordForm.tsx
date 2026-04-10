@@ -15,8 +15,8 @@ export default function ForgetPasswordForm() {
         resolver: zodResolver(ForgetPasswordSchema)
     })
 
+    
     console.log(errors);
-
     // const [Credentials, setCredentials] = useState<IUsername>({
     //     username: ""
     // })
