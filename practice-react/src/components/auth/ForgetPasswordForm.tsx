@@ -15,7 +15,7 @@ export default function ForgetPasswordForm() {
         resolver: zodResolver(ForgetPasswordSchema)
     })
 
-    
+
     console.log(errors);
     // const [Credentials, setCredentials] = useState<IUsername>({
     //     username: ""
@@ -48,6 +48,7 @@ export default function ForgetPasswordForm() {
                 </button> */}
 
                 <CancelButton className="flex gap-3" disabled={isSubmitting}> <LuX></LuX>  Reset</CancelButton>
+
                 <SubmitButton className="flex gap-3" disabled={isSubmitting}> <LuSend></LuSend> Send Request</SubmitButton>
             </div>
         </form>
