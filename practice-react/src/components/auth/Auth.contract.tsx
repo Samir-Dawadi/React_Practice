@@ -8,6 +8,11 @@ export interface ICredentials extends IUsername {
     password: string
 }
 
+export interface IResetPassword {
+    password: string,
+    confirmPassword: string
+}
+
 
 export const LoginSchema = z.object({
     username: z.email("Invalid Email Format...").nonempty().nonoptional(),

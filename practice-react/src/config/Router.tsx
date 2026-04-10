@@ -8,6 +8,8 @@ import AdminLayout from "../pages/Layouts/AdminLayout"
 import AdminDahboard from "../pages/Admin/Dashboard"
 import UserList from "../pages/Admin/user/UserList"
 import UserRegistration from "../pages/Admin/user/UserRegister"
+import ResetPassword from "../pages/auth/PasswordReset"
+
 // import AdminDahboard from "../pages/Admin/Dashboard"
 // import AdminLayout from "../pages/Layouts/AdminLayout"
 
@@ -16,7 +18,7 @@ import UserRegistration from "../pages/Admin/user/UserRegister"
 const routeData = createBrowserRouter([
     { path: "/", element: <HomePage /> },
     { path: "/forget-password", element: <ForgetPassword /> },
-
+    { path: "/reset-password", Component: ResetPassword },
 
     {
         path: "/admin", element: <AdminLayout />, children: [
