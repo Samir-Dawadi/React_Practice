@@ -81,6 +81,13 @@ export default function LoginForm() {
             localStorage.clear()                        //clears all localstorage items
 
 
+
+            sessionStorage.setItem("token", response.token)
+            sessionStorage.getItem("token")
+            sessionStorage.removeItem("token")
+            sessionStorage.clear("token")
+
+
             console.log(Credentials)
         } catch (exception) {
             console.log(exception)
