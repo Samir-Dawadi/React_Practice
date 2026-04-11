@@ -1,4 +1,5 @@
 import axios from "axios";
+import Cookies from "js-cookie"
 
 const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_APP_BASE_URL,
@@ -10,6 +11,19 @@ const axiosInstance = axios.create({
         "Content-Type": "application/json"
     }
 })
+
+
+//request interceptors
+
+axiosInstance.interceptors.request.use((config) => {
+    //console.log("i am in req interceptor")
+    const token = Cookies.get("Auth_Key_61")
+    if (token) {
+        config.headers.Authorization = "Bearer " + token   //to authorize private api endpoints
+    }
+    return config
+})
+
 
 
 export default axiosInstance

@@ -7,7 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { CancelButton, SubmitButton } from "../ui/button/Button"
 import axiosInstance from "../../config/ApiClient"
 
-// import Cookies from "js-cookie"
+import Cookies from "js-cookie"
+import { useNavigate } from "react-router"
 // import { useState } from "react"
 
 export default function LoginForm() {
@@ -58,6 +59,8 @@ export default function LoginForm() {
 
     // console.log(errors)
 
+    const router = useNavigate()
+
     const login = async (Credentials: ICredentials) => {
         try {
             // let response = await fetch(`${import.meta.env.VITE_APP_BASE_URL}auth/login`, {
@@ -71,10 +74,22 @@ export default function LoginForm() {
 
             // response = await response.json()   //in axios instead of this line:  responseType: "json",
 
-            const response = await axiosInstance.post('auth/login', Credentials)
-            console.log(response)
-            console.log(response.data)
+            const response = await axiosInstance.post('auth/login', {
+                ...Credentials,
+                expiresIn: 24 * 60
+            })
+            Cookies.set("Auth_Key_61", response.data.accessToken, {           //--> iniside this {} configuration(i.e config)
+                expires: 1,
+                sameSite: "Lax",
+                secure: true
+            })
+            // console.log(response)
+            // console.log(response.data)
 
+            const loggedInUser = await axiosInstance.get("auth/me")
+            console.log(loggedInUser)
+
+            router("/" + loggedInUser.data.role)
 
 
             // const response = {
