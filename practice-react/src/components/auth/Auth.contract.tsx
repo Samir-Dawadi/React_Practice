@@ -15,7 +15,7 @@ export interface IResetPassword {
 
 
 export const LoginSchema = z.object({
-    username: z.email("Invalid Email Format...").nonempty().nonoptional(),
+    username: z.string().nonempty().nonoptional(),
     password: z.string().nonempty().nonoptional()
 })
 

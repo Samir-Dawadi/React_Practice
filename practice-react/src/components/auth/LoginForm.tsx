@@ -6,9 +6,20 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { CancelButton, SubmitButton } from "../ui/button/Button"
 
-import Cookies from "js-cookie"
+// import Cookies from "js-cookie"
+// import { useState } from "react"
 
 export default function LoginForm() {
+
+    //local state=>declared within component n cannot be shared with other 
+    // const [Loading, setLoading] = useState<boolean>(true)
+
+    //global state=> declared outside the component and can be shared with other components 
+    // -context=> auto built in react , follows hirerachay ->top to bottom 
+    // -redux=>toolkit
+    //other also available as : zustand , jotai , tanstack query (api state)
+
+
     const { control, handleSubmit, formState: { errors } } = useForm<ICredentials>({   //control->for controlled component(eg form that can be edited/cannot be edited like chatgpt ma afno detail / name edit garna milni , default value haru edit garna milni)
         defaultValues: {
             username: "",
@@ -48,9 +59,25 @@ export default function LoginForm() {
 
     const login = async (Credentials: ICredentials) => {
         try {
-            const response = {
-                token: "afasdfdfdfdg4tert4tw4gtgwwert43"
-            }
+            let response = await fetch(`${import.meta.env.VITE_APP_BASE_URL}auth/login`, {
+
+                method: "POST",
+                headers: { "Content-Type": " application/json " },                    // =>json format
+                //headers;{"Content-Type:"multipart/form-data"}                         =>only for multiple file 
+                //headers:{"Content-Type":"application/x-www-form-urlencoded"},         =>neither file nor json
+                body: JSON.stringify(Credentials)
+            })
+
+            response = await response.json()
+            console.log(response)
+
+
+
+            // const response = {
+            //     token: "afasdfdfdfdg4tert4tw4gtgwwert43"
+            // }
+
+            // per domain 50 cookies  ->per cookie 4096 ch ->if 1 ch is 1byte then 4096*1byte -> 4kb
 
             //js default
 
@@ -75,20 +102,21 @@ export default function LoginForm() {
 
             //LocalStorage->5MB , Non expiring , until we destroy or clear the cache of browser
 
-            localStorage.setItem("token", response.token);
-            localStorage.getItem("token")
-            localStorage.removeItem("token")            //remove key that is in the token
-            localStorage.clear()                        //clears all localstorage items
+            // localStorage.setItem("token", response.token);
+            // localStorage.getItem("token")
+            // localStorage.removeItem("token")            //remove key that is in the token
+            // localStorage.clear()                        //clears all localstorage items
 
 
 
-            sessionStorage.setItem("token", response.token)
-            sessionStorage.getItem("token")
-            sessionStorage.removeItem("token")
-            sessionStorage.clear("token")
+            //SessionStorage->same syntax and working mechanism as local storage , -> 5MB , and it is tab specific 
+            // sessionStorage.setItem("token", response.token)
+            // sessionStorage.getItem("token")
+            // sessionStorage.removeItem("token")
+            // sessionStorage.clear()
 
 
-            console.log(Credentials)
+            // console.log(Credentials)
         } catch (exception) {
             console.log(exception)
         }
@@ -103,7 +131,7 @@ export default function LoginForm() {
                     <TextInput
                         errMsg={errors?.username?.message}
                         control={control}
-                        type="email"
+                        type="text"
                         name="username"
                     />
                 </div>

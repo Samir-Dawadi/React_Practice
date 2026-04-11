@@ -235,7 +235,7 @@
 ```
 
 ## API (Application Programming Interface)
-  - nodejs, php, python, .net, java, 
+  - nodejs, php, python, .net, java,  
   - Response type -> `json`
     - name, email, id
   - API Type 
