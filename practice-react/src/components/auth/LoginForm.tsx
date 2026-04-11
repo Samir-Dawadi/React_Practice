@@ -5,6 +5,7 @@ import { LoginSchema, type ICredentials } from "./Auth.contract"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { CancelButton, SubmitButton } from "../ui/button/Button"
+import axiosInstance from "../../config/ApiClient"
 
 // import Cookies from "js-cookie"
 // import { useState } from "react"
@@ -59,17 +60,20 @@ export default function LoginForm() {
 
     const login = async (Credentials: ICredentials) => {
         try {
-            let response = await fetch(`${import.meta.env.VITE_APP_BASE_URL}auth/login`, {
+            // let response = await fetch(`${import.meta.env.VITE_APP_BASE_URL}auth/login`, {
 
-                method: "POST",
-                headers: { "Content-Type": " application/json " },                    // =>json format
-                //headers;{"Content-Type:"multipart/form-data"}                         =>only for multiple file 
-                //headers:{"Content-Type":"application/x-www-form-urlencoded"},         =>neither file nor json
-                body: JSON.stringify(Credentials)
-            })
+            //     method: "POST",
+            //     headers: { "Content-Type": " application/json " },                    // =>json format
+            //     //headers;{"Content-Type:"multipart/form-data"}                         =>only for multiple file 
+            //     //headers:{"Content-Type":"application/x-www-form-urlencoded"},         =>neither file nor json
+            //     body: JSON.stringify(Credentials)
+            // })
 
-            response = await response.json()
+            // response = await response.json()   //in axios instead of this line:  responseType: "json",
+
+            const response = await axiosInstance.post('auth/login', Credentials)
             console.log(response)
+            console.log(response.data)
 
 
 
