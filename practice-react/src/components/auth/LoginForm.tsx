@@ -57,20 +57,29 @@ export default function LoginForm() {
             // document.cookie = "token:"+response.token+"; ExpiresIn:"+ new Date()+"; path =/"
 
 
-            Cookies.set("token", response.token, {         //cookie name (i.e token) is respnose.token (token=response.token)
-                path: "/",       //default
-                expires: 1,   //day
-                secure: true,  //https
-                sameSite: "Lax"  //only allowed to work at same site , wont work at difrnt site 
+            // Cookies.set("token", response.token, {         //cookie name (i.e token) is respnose.token (token=response.token)
+            //     path: "/",       //default
+            //     expires: 1,   //day
+            //     secure: true,  //https
+            //     sameSite: "Lax"  //only allowed to work at same site , wont work at difrnt site 
 
-            })
+            // })
 
             //cookie remove:
             // Cookies.remove("token");
 
             //cookie get:
-            const token = Cookies.get("token")
-            console.log(token)
+            // const token = Cookies.get("token")
+            // console.log(token)
+
+
+            //LocalStorage->5MB , Non expiring , until we destroy or clear the cache of browser
+
+            localStorage.setItem("token", response.token);
+            localStorage.getItem("token")
+            localStorage.removeItem("token")            //remove key that is in the token
+            localStorage.clear()                        //clears all localstorage items
+
 
             console.log(Credentials)
         } catch (exception) {
