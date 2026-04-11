@@ -6,6 +6,8 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { CancelButton, SubmitButton } from "../ui/button/Button"
 
+import Cookies from "js-cookie"
+
 export default function LoginForm() {
     const { control, handleSubmit, formState: { errors } } = useForm<ICredentials>({   //control->for controlled component(eg form that can be edited/cannot be edited like chatgpt ma afno detail / name edit garna milni , default value haru edit garna milni)
         defaultValues: {
@@ -46,6 +48,30 @@ export default function LoginForm() {
 
     const login = async (Credentials: ICredentials) => {
         try {
+            const response = {
+                token: "afasdfdfdfdg4tert4tw4gtgwwert43"
+            }
+
+            //js default
+
+            // document.cookie = "token:"+response.token+"; ExpiresIn:"+ new Date()+"; path =/"
+
+
+            Cookies.set("token", response.token, {         //cookie name (i.e token) is respnose.token (token=response.token)
+                path: "/",       //default
+                expires: 1,   //day
+                secure: true,  //https
+                sameSite: "Lax"  //only allowed to work at same site , wont work at difrnt site 
+
+            })
+
+            //cookie remove:
+            // Cookies.remove("token");
+
+            //cookie get:
+            const token = Cookies.get("token")
+            console.log(token)
+
             console.log(Credentials)
         } catch (exception) {
             console.log(exception)
