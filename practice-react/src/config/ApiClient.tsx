@@ -24,6 +24,24 @@ axiosInstance.interceptors.request.use((config) => {
     return config
 })
 
+//response interceptor
+
+axiosInstance.interceptors.response.use(    //use two parameter ->success and failure
+    (response) => response.data,       //this is success case 
+    (exception) => {                   //this is failure case , now the error will be displayed from this file ApiClient
+        // console.log(exception)
+        // console.error(exception)
+        // console.error(exception.status)
+        if (exception.status === 400 || exception.status === 402) {
+            throw exception?.response?.data
+        }
+        else {
+            throw exception?.response
+        }
+    }
+
+)
+
 
 
 export default axiosInstance

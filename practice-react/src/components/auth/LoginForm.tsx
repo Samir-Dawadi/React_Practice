@@ -77,8 +77,10 @@ export default function LoginForm() {
             const response = await axiosInstance.post('auth/login', {
                 ...Credentials,
                 expiresIn: 24 * 60
-            })
-            Cookies.set("Auth_Key_61", response.data.accessToken, {           //--> iniside this {} configuration(i.e config)
+            }) as { accessToken: string }
+
+
+            Cookies.set("Auth_Key_61", response.accessToken, {           //--> iniside this {} configuration(i.e config)
                 expires: 1,
                 sameSite: "Lax",
                 secure: true
@@ -86,10 +88,10 @@ export default function LoginForm() {
             // console.log(response)
             // console.log(response.data)
 
-            const loggedInUser = await axiosInstance.get("auth/me")
-            console.log(loggedInUser)
+            const loggedInUser = await axiosInstance.get("auth/me") as { role: string }
+            // console.log(loggedInUser)
 
-            router("/" + loggedInUser.data.role)
+            router("/" + loggedInUser.role)
 
 
             // const response = {
