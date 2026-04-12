@@ -39,7 +39,6 @@ axiosInstance.interceptors.response.use(    //use two parameter ->success and fa
             throw exception?.response
         }
     }
-
 )
 
 
