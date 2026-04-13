@@ -33,3 +33,31 @@ export const ForgetPasswordSchema = z.object({
 //     image:z.string().nonempty().nonoptional(),
 //     submit:z.string().nonempty().nonoptional(),
 // })
+
+
+export interface IUserDetail {
+    id: number | string;
+    firstName: string;
+    lastName: string;
+    maidenName: string;
+    age: number;
+    gender: string;
+    email: string;
+    phone: string;
+    username: string;
+    birthDate: string;
+    image: string;
+    address: {
+        address: string;
+        city: string,
+        state: string,
+        stateCode: string,
+        postalCode: string,
+        coordinates: {
+            lat: number;
+            lng: number;
+        };
+        country: string;
+    };
+    role: string;
+}

@@ -1,15 +1,13 @@
 import { TextInput } from "../ui/form/Input"
 import { FormLabel } from "../ui/form/Label"
-import { LoginSchema, type ICredentials } from "./Auth.contract"
+import { LoginSchema, type ICredentials, type IUserDetail } from "./Auth.contract"
 
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { CancelButton, SubmitButton } from "../ui/button/Button"
-import axiosInstance from "../../config/ApiClient"
 
-import Cookies from "js-cookie"
 import { useNavigate } from "react-router"
-// import { useState } from "react"
+import { useAuth } from "../../lib/hooks/useAuth"
 
 export default function LoginForm() {
 
@@ -61,90 +59,103 @@ export default function LoginForm() {
 
     const router = useNavigate()
 
-    const login = async (Credentials: ICredentials) => {
+    const { login } = useAuth()
+
+
+    const loginHandle = async (credentials: ICredentials) => {
         try {
-            // let response = await fetch(`${import.meta.env.VITE_APP_BASE_URL}auth/login`, {
-
-            //     method: "POST",
-            //     headers: { "Content-Type": " application/json " },                    // =>json format
-            //     //headers;{"Content-Type:"multipart/form-data"}                         =>only for multiple file 
-            //     //headers:{"Content-Type":"application/x-www-form-urlencoded"},         =>neither file nor json
-            //     body: JSON.stringify(Credentials)
-            // })
-
-            // response = await response.json()   //in axios instead of this line:  responseType: "json",
-
-            const response = await axiosInstance.post('auth/login', {
-                ...Credentials,
-                expiresIn: 24 * 60
-            }) as { accessToken: string }
-
-
-            Cookies.set("Auth_Key_61", response.accessToken, {           //--> iniside this {} configuration(i.e config)
-                expires: 1,
-                sameSite: "Lax",
-                secure: true
-            })
-            // console.log(response)
-            // console.log(response.data)
-
-            const loggedInUser = await axiosInstance.get("auth/me") as { role: string }
-            // console.log(loggedInUser)
-
+            const loggedInUser = (await login(credentials)) as IUserDetail
             router("/" + loggedInUser.role)
 
-
-            // const response = {
-            //     token: "afasdfdfdfdg4tert4tw4gtgwwert43"
-            // }
-
-            // per domain 50 cookies  ->per cookie 4096 ch ->if 1 ch is 1byte then 4096*1byte -> 4kb
-
-            //js default
-
-            // document.cookie = "token:"+response.token+"; ExpiresIn:"+ new Date()+"; path =/"
-
-
-            // Cookies.set("token", response.token, {         //cookie name (i.e token) is respnose.token (token=response.token)
-            //     path: "/",       //default
-            //     expires: 1,   //day
-            //     secure: true,  //https
-            //     sameSite: "Lax"  //only allowed to work at same site , wont work at difrnt site 
-
-            // })
-
-            //cookie remove:
-            // Cookies.remove("token");
-
-            //cookie get:
-            // const token = Cookies.get("token")
-            // console.log(token)
-
-
-            //LocalStorage->5MB , Non expiring , until we destroy or clear the cache of browser
-
-            // localStorage.setItem("token", response.token);
-            // localStorage.getItem("token")
-            // localStorage.removeItem("token")            //remove key that is in the token
-            // localStorage.clear()                        //clears all localstorage items
-
-
-
-            //SessionStorage->same syntax and working mechanism as local storage , -> 5MB , and it is tab specific 
-            // sessionStorage.setItem("token", response.token)
-            // sessionStorage.getItem("token")
-            // sessionStorage.removeItem("token")
-            // sessionStorage.clear()
-
-
-            // console.log(Credentials)
         } catch (exception) {
             console.log(exception)
         }
     }
 
+    // const login = async (Credentials: ICredentials) => {
+    //     try {
+    //         // let response = await fetch(`${import.meta.env.VITE_APP_BASE_URL}auth/login`, {
+
+    //         //     method: "POST",
+    //         //     headers: { "Content-Type": " application/json " },                    // =>json format
+    //         //     //headers;{"Content-Type:"multipart/form-data"}                         =>only for multiple file 
+    //         //     //headers:{"Content-Type":"application/x-www-form-urlencoded"},         =>neither file nor json
+    //         //     body: JSON.stringify(Credentials)
+    //         // })
+
+    //         // response = await response.json()   //in axios instead of this line:  responseType: "json",
+
+    //         const response = await axiosInstance.post('auth/login', {
+    //             ...Credentials,
+    //             expiresIn: 24 * 60
+    //         }) as { accessToken: string }
+
+
+    //         Cookies.set("Auth_Key_61", response.accessToken, {           //--> iniside this {} configuration(i.e config)
+    //             expires: 1,
+    //             sameSite: "Lax",
+    //             secure: true
+    //         })
+    //         // console.log(response)
+    //         // console.log(response.data)
+
+    //         const loggedInUser = await axiosInstance.get("auth/me") as { role: string }
+    //         // console.log(loggedInUser)
+
+    //         router("/" + loggedInUser.role)
+
+
+    //         // const response = {
+    //         //     token: "afasdfdfdfdg4tert4tw4gtgwwert43"
+    //         // }
+
+    //         // per domain 50 cookies  ->per cookie 4096 ch ->if 1 ch is 1byte then 4096*1byte -> 4kb
+
+    //         //js default
+
+    //         // document.cookie = "token:"+response.token+"; ExpiresIn:"+ new Date()+"; path =/"
+
+
+    //         // Cookies.set("token", response.token, {         //cookie name (i.e token) is respnose.token (token=response.token)
+    //         //     path: "/",       //default
+    //         //     expires: 1,   //day
+    //         //     secure: true,  //https
+    //         //     sameSite: "Lax"  //only allowed to work at same site , wont work at difrnt site 
+
+    //         // })
+
+    //         //cookie remove:
+    //         // Cookies.remove("token");
+
+    //         //cookie get:
+    //         // const token = Cookies.get("token")
+    //         // console.log(token)
+
+
+    //         //LocalStorage->5MB , Non expiring , until we destroy or clear the cache of browser
+
+    //         // localStorage.setItem("token", response.token);
+    //         // localStorage.getItem("token")
+    //         // localStorage.removeItem("token")            //remove key that is in the token
+    //         // localStorage.clear()                        //clears all localstorage items
+
+
+
+    //         //SessionStorage->same syntax and working mechanism as local storage , -> 5MB , and it is tab specific 
+    //         // sessionStorage.setItem("token", response.token)
+    //         // sessionStorage.getItem("token")
+    //         // sessionStorage.removeItem("token")
+    //         // sessionStorage.clear()
+
+
+    //         // console.log(Credentials)
+    //     } catch (exception) {
+    //         console.log(exception)
+    //     }
+    // }
+
     return (
-        <form onSubmit={handleSubmit(login)} className="flex flex-col gap-5">
+        <form onSubmit={handleSubmit(loginHandle)} className="flex flex-col gap-5">
 
             <div className="flex w-full items-center">
                 <FormLabel htmlFor="username">User Name:</FormLabel>

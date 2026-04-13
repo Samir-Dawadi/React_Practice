@@ -260,10 +260,10 @@
 
   ```
 
-### Local State management
-### Global State Management
+### Local State management=>data used inside one component only
+### Global State Management=>shared data across multiple components
   
-  - Redux(large scale application)
+  - Redux(large scale application , e.g. e-commerce, dashboards)
     - Store(global state)
     - Reducers
     - Consumer(dispatch, store selector)

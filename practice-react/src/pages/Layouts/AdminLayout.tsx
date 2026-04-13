@@ -2,12 +2,15 @@ import { LuCircleUserRound } from "react-icons/lu";
 import Logo from "../../components/Logo/logo";
 import { Outlet } from "react-router";
 import { AdminSidebar } from "../../components/ui/sidebar/AdminSidebar";
+import { useAuth } from "../../lib/hooks/useAuth";
 
 export default function AdminLayout() {
-    const LoggedInUser = {
-        name: "Samir Dawadi",
-        role: "admin"
-    }
+    // const LoggedInUser = {
+    //     name: "Samir Dawadi",
+    //     role: "admin"
+    // }
+
+    const { authUser } = useAuth();
 
     return (
         <>
@@ -20,7 +23,7 @@ export default function AdminLayout() {
                     <div>
                         <div className="flex items-center text-emerald-900 text-shadow-lg gap-2">
                             <LuCircleUserRound className="size-7" />
-                            <span className="text-bold ">Samir Dawadi</span>
+                            <span className="text-bold ">{authUser?.firstName} {authUser?.lastName}</span>
 
                             <div className="relative inline-flex">
                                 <span className="inline-flex divide-x divide-gray-300 overflow-hidden rounded border border-gray-300 bg-white shadow-sm">
@@ -65,7 +68,7 @@ export default function AdminLayout() {
                         (LoggedInUser.role === "admin") ? <AdminSidebar /> : <></>
                     } */}
 
-                    <AdminSidebar LoggedInUser={LoggedInUser} />
+                    <AdminSidebar LoggedInUser={authUser} />
 
                     <section className="w-full bg-gray-200 p-3 mt-3 rounded-md">
                         <Outlet />
