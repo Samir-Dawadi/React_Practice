@@ -242,6 +242,11 @@
     - REST, SOAP, Graphql, gRPC
 
   - CRUD (Create, Read, Update or Delete)
+  
+  -Frontend Tools to Call API
+  fetch (built-in JS)
+  axios (popular library)
+  tanstack-query (advanced data fetching)
     - `fetch` or `axios` or `tanstack-query`
     - `Read => get`, `Create => post`, `Update => put/patch`, `Delete => delete`
 

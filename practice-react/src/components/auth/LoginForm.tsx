@@ -72,10 +72,10 @@ export default function LoginForm() {
         }
     }
 
-    // const login = async (Credentials: ICredentials) => {
-    //     try {
-    //         // let response = await fetch(`${import.meta.env.VITE_APP_BASE_URL}auth/login`, {
+    // const login = async (Credentials: ICredentials) => {      // Async function to handle user login (runs in background and returns a Promise)
 
+    //     try {    // Try block is used to handle successful API call and prevent app crash on error
+    //         // let response = await fetch(`${import.meta.env.VITE_APP_BASE_URL}auth/login`, {
     //         //     method: "POST",
     //         //     headers: { "Content-Type": " application/json " },                    // =>json format
     //         //     //headers;{"Content-Type:"multipart/form-data"}                         =>only for multiple file 
@@ -85,24 +85,38 @@ export default function LoginForm() {
 
     //         // response = await response.json()   //in axios instead of this line:  responseType: "json",
 
-    //         const response = await axiosInstance.post('auth/login', {
-    //             ...Credentials,
-    //             expiresIn: 24 * 60
-    //         }) as { accessToken: string }
 
 
-    //         Cookies.set("Auth_Key_61", response.accessToken, {           //--> iniside this {} configuration(i.e config)
-    //             expires: 1,
-    //             sameSite: "Lax",
-    //             secure: true
+
+    // Send POST request to login API endpoint
+    //         const response = await axiosInstance.post('auth/login', {   //this .post is a method in api i.e in dummyjson 
+    //             ...Credentials,          // Spread operator: sends username + password from user input
+    //             expiresIn: 24 * 60       //Token expiry time (in minutes) sent to backend
+    //         }) as { accessToken: string }  //Type assertion: tells TypeScript that response contains accessToken
+
+
+    //         Cookies.set("Auth_Key_61", response.accessToken, {      //tore authentication token in browser cookies       //--> iniside this {} configuration(i.e config)
+    //             expires: 1,    //1day 
+    //             sameSite: "Lax",  //Helps protect against CSRF attacks
+    //             secure: true    //ookie will be sent only over HTTPS
     //         })
     //         // console.log(response)
     //         // console.log(response.data)
 
+    // This step is used to keep user logged in
+    // Send GET request to get current logged-in user details
+    // "auth/me" returns user info based on stored token
     //         const loggedInUser = await axiosInstance.get("auth/me") as { role: string }
+
     //         // console.log(loggedInUser)
 
     //         router("/" + loggedInUser.role)
+
+
+
+
+
+
 
 
     //         // const response = {
