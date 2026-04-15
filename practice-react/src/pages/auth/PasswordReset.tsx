@@ -1,8 +1,26 @@
 import ResetPasswordForm from "../../components/auth/ResetPasswordForm";
+
 // import Logo from "../../components/Logo/logo";
 // import { H1 } from "../../components/ui/typography/PageTitle";
 
+import { useEffect, type Dispatch, type ReactNode, type SetStateAction } from "react";
+
+import { NavLink, useOutletContext } from "react-router";
+
 export default function ResetPassword() {
+
+    const { setPageContext } = useOutletContext<{
+        setPageContext: Dispatch<SetStateAction<{ pagetitle: string, content: string, formtitle: ReactNode }>>
+    }>()
+
+    useEffect(() => {
+        setPageContext({
+            pagetitle: "Password Reset ",
+            content: "lPassword Reset Page.........",
+            formtitle: "Set password"
+        })
+    }, [])
+
     return (
         <>
             {/* Design 
@@ -33,12 +51,12 @@ export default function ResetPassword() {
             </div>
 
             <div className="flex w-full items-center justify-center">
-                <a
-                    href="/"
+                <NavLink
+                    to="/"
                     className="border p-2 text-center rounded-full shadow border-teal-800/40 w-full text-teal-700 text-sm hover:underline hover:text-teal-600 hover:bg-teal-800/5 transition hover:scale-98"
                 >
                     Login
-                </a>
+                </NavLink>
             </div>
             {/* </div>
             </section> */}

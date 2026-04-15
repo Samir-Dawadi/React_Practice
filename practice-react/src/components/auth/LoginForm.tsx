@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { CancelButton, SubmitButton } from "../ui/button/Button"
 
-import { useNavigate } from "react-router"
+import { NavLink, useNavigate } from "react-router"
 import { useAuth } from "../../lib/hooks/useAuth"
 
 export default function LoginForm() {
@@ -196,13 +196,13 @@ export default function LoginForm() {
                 </div>
             </div>
             <div className="flex w-full items-center justify-end">
-                <a
+                <NavLink
 
-                    href="/forget-password"
+                    to="/forget-password"
                     className="text-teal-700 italic text-sm hover:underline hover:text-teal-600 transition hover:scale-96"
                 >
                     Forgot password?
-                </a>
+                </NavLink>
             </div>
             <div className="flex w-full items-center gap-3">
                 {/* <button type="reset" className="rounded-md cursor-pointer transition hover:scale-98 hover:bg-red-700 w-full bg-red-800 text-white flex items-center justify-center p-2">

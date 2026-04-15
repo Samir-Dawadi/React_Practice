@@ -1,19 +1,26 @@
-import { useEffect } from "react";
+import { useEffect, type Dispatch, type ReactNode, type SetStateAction } from "react";
 
-import { useAuth } from "../../lib/hooks/useAuth";
-import { useNavigate } from "react-router";
+import { useOutletContext } from "react-router";
 import LoginForm from "../../components/auth/LoginForm";
 
 
 export default function HomePage() {
 
-    const { authUser } = useAuth();
-    const navigate = useNavigate();
+
+
+    const { setPageContext } = useOutletContext<{
+        setPageContext: Dispatch<SetStateAction<{ pagetitle: string, content: string, formtitle: ReactNode }>>
+    }>()
+
     useEffect(() => {
-        if (authUser && authUser.role) {
-            navigate('/' + authUser.role)                     //after / the url will be added based on role of user
-        }
-    }, [authUser])
+        setPageContext({
+            pagetitle: "Welcome to CMS",
+            content: "login message.......",
+            formtitle: "Sign In from here"
+        })
+    }, [])
+
+
 
 
     return (

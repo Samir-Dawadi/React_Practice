@@ -60,24 +60,31 @@
 
 
 // import Logoo from "../../assests/image/logo.png";
-import { useNavigate } from "react-router";
 import ForgetPasswordForm from "../../components/auth/ForgetPasswordForm"
-import Logo from "../../components/Logo/logo"
-import { H1 } from "../../components/ui/typography/PageTitle"
-import { useAuth } from "../../lib/hooks/useAuth";
-import { useEffect } from "react";
+// import Logo from "../../components/Logo/logo"
+// import { H1 } from "../../components/ui/typography/PageTitle"
+
 // import LoginForm from "../../components/auth/LoginForm"
+
+import { useEffect, type Dispatch, type ReactNode, type SetStateAction } from "react";
+
+import { NavLink, useOutletContext } from "react-router";
 
 
 export default function ForgetPassword() {
 
-    const { authUser } = useAuth();
-    const navigate = useNavigate();
+    const { setPageContext } = useOutletContext<{
+        setPageContext: Dispatch<SetStateAction<{ pagetitle: string, content: string, formtitle: ReactNode }>>
+    }>()
+
     useEffect(() => {
-        if (authUser && authUser.role) {
-            navigate('/' + authUser.role)                     //after / the url will be added based on role of user here the role is admin so if we try to change the url then we only get redirected to the admin page , we cannot redirect to other page
-        }
-    }, [authUser])
+        setPageContext({
+            pagetitle: "Forgot Password",
+            content: "Forgot Password Page ....",
+            formtitle: "Request for password change"
+        })
+    }, [])
+
 
 
     return (
@@ -87,12 +94,12 @@ export default function ForgetPassword() {
             <ForgetPasswordForm />
 
             <div className="flex w-full justify-center">
-                <a
-                    href="/"
+                <NavLink
+                    to="/"
                     className=" w-full text-center text-xl text-bold border  bg-green-200/50 hover:bg-green-300 rounded-xl px-6 py-2 mt-20 text-teal-700 hover:underline hover:text-teal-600 transition hover:scale-96"
                 >
                     Login Page
-                </a>
+                </NavLink>
             </div>
         </>
     )
