@@ -23,6 +23,8 @@ export default function AdminLayout() {
                     <div>
                         <div className="flex items-center text-emerald-900 text-shadow-lg gap-2">
                             <LuCircleUserRound className="size-7" />
+                            {/* <span className="text-bold ">Samir Dawadi</span> */}
+
                             <span className="text-bold ">{authUser?.firstName} {authUser?.lastName}</span>
 
                             <div className="relative inline-flex">

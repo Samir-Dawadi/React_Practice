@@ -10,6 +10,9 @@ import { useNavigate } from "react-router"
 import { useAuth } from "../../lib/hooks/useAuth"
 
 export default function LoginForm() {
+    const router = useNavigate()
+
+    const { login } = useAuth()
 
     //local state=>declared within component n cannot be shared with other 
     // const [Loading, setLoading] = useState<boolean>(true)
@@ -57,9 +60,7 @@ export default function LoginForm() {
 
     // console.log(errors)
 
-    const router = useNavigate()
 
-    const { login } = useAuth()
 
 
     const loginHandle = async (credentials: ICredentials) => {
@@ -106,7 +107,7 @@ export default function LoginForm() {
     // This step is used to keep user logged in
     // Send GET request to get current logged-in user details
     // "auth/me" returns user info based on stored token
-    //         const loggedInUser = await axiosInstance.get("auth/me") as { role: string }
+    //         const loggedInUser = await axiosInstance.get("auth/me") as { role: string }     // as...=> “yo response ma role naam ko string value hunxa”
 
     //         // console.log(loggedInUser)
 

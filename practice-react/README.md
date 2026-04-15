@@ -242,7 +242,7 @@
     - REST, SOAP, Graphql, gRPC
 
   - CRUD (Create, Read, Update or Delete)
-  
+
   -Frontend Tools to Call API
   fetch (built-in JS)
   axios (popular library)
@@ -266,17 +266,29 @@
   ```
 
 ### Local State management=>data used inside one component only
-### Global State Management=>shared data across multiple components
+### Global State Management=>shared data across multiple components from one component in the whole app.
+
+const UserContext = createContext();
+function App() {
+  const [user, setUser] = useState("Samir");
+
+  return (
+    <UserContext.Provider value={user}>
+      <Home />
+      <Profile />
+    </UserContext.Provider>
+  );
+}
   
   - Redux(large scale application , e.g. e-commerce, dashboards)
     - Store(global state)
     - Reducers
     - Consumer(dispatch, store selector)
 
-  - Context(Small to medium scale Auth )
-    - Create Context(state share, actions)
-    - Provide(to components-provider)
-    - Consumption(call)
+  - Context(Small to medium scale , good to use for Auth , it is hirerchical)
+    - Create Context(state share, actions)(contex creates here)
+    - Provide(to components-provider)(provider folder)
+    - Consumption(call)(hooks folder)
 
 ## React Optimization 
   - Component Segreggation (Atomic Design pattern follow)
