@@ -5,6 +5,7 @@ import AuthContext from "../AuthContext";
 import type { ICredentials, IUserDetail } from "../../components/auth/Auth.contract";
 import Cookies from "js-cookie";
 import axiosInstance from "../../config/ApiClient";
+import Loading from "../../components/ui/Loading/Loading";
 
 export default function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
     const [authUser, setAuthUser] = useState<IUserDetail | null>(null);     //default value is null
@@ -63,7 +64,10 @@ export default function AuthProvider({ children }: Readonly<{ children: ReactNod
 
     return authloading ?
         (
-            <>Loading.....</>
+            // <>Loading</>
+            <section className="w-full h-screen flex items-center justify-center">
+                <Loading />
+            </section>
         )
         :
         (<AuthContext.Provider value={       //provider provides the data/method from this value=...
