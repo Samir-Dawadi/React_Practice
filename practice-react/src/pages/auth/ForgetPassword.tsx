@@ -60,44 +60,40 @@
 
 
 // import Logoo from "../../assests/image/logo.png";
+import { useNavigate } from "react-router";
 import ForgetPasswordForm from "../../components/auth/ForgetPasswordForm"
 import Logo from "../../components/Logo/logo"
 import { H1 } from "../../components/ui/typography/PageTitle"
+import { useAuth } from "../../lib/hooks/useAuth";
+import { useEffect } from "react";
 // import LoginForm from "../../components/auth/LoginForm"
 
 
 export default function ForgetPassword() {
+
+    const { authUser } = useAuth();
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (authUser && authUser.role) {
+            navigate('/' + authUser.role)                     //after / the url will be added based on role of user here the role is admin so if we try to change the url then we only get redirected to the admin page , we cannot redirect to other page
+        }
+    }, [authUser])
+
+
     return (
         <>
-            <section className="bg-gray-100 h-screen flex  p-5 gap-5">
-                <div className="w-1/3 flex flex-col gap-5 bg-emerald-800 rounded-sm justify-center items-center p-7 text-white">
-                    <Logo />
-                    <H1 className="text-green-100">Forgot Page</H1>
-                    <p className="text-center p-5"> ipsum dolor sit amet consectetur, adipisicing elit. Veritatis alias deleniti placeat odit id amet accusantium reiciendis sequi optio eaque suscipit velit delectus, ullam repellat a ex enim. Minima, officia.</p>
-                </div>
 
 
-                <div className="w-2/3 flex flex-col gap-5 bg-gray-200 rounded-sm p-10">
-                    <div className="flex border-b border-b-green-900/70 pb-10">
+            <ForgetPasswordForm />
 
-                        <H1>Recovery Form</H1>
-                    </div>
-
-                    <ForgetPasswordForm />
-
-                    <div className="flex w-full justify-center">
-                        <a
-                            href="/"
-                            className=" w-full text-center text-xl text-bold border  bg-green-200/50 hover:bg-green-300 rounded-xl px-6 py-2 mt-20 text-teal-700 hover:underline hover:text-teal-600 transition hover:scale-96"
-                        >
-                            Login Page
-                        </a>
-                    </div>
-                </div>
-
-
-            </section>
-
+            <div className="flex w-full justify-center">
+                <a
+                    href="/"
+                    className=" w-full text-center text-xl text-bold border  bg-green-200/50 hover:bg-green-300 rounded-xl px-6 py-2 mt-20 text-teal-700 hover:underline hover:text-teal-600 transition hover:scale-96"
+                >
+                    Login Page
+                </a>
+            </div>
         </>
     )
 }
