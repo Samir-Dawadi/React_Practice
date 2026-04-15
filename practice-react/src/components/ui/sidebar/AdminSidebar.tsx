@@ -1,6 +1,7 @@
 import { NavLink } from "react-router";
+import type { IUserDetail } from "../../auth/Auth.contract";
 
-export const AdminSidebar = ({ LoggedInUser }) => {
+export const AdminSidebar = ({ LoggedInUser }: Readonly<{ LoggedInUser: IUserDetail }>) => {
     return (
         <aside className="w-64">
             <div className="flex h-[95vh] flex-col justify-between border-e border-gray-100 bg-white">
@@ -132,15 +133,15 @@ export const AdminSidebar = ({ LoggedInUser }) => {
                     >
                         <img
                             alt=""
-                            src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?auto=format&amp;fit=crop&amp;q=80&amp;w=1160"
+                            src={LoggedInUser?.image}
                             className="size-10 rounded-full object-cover"
                         />
 
                         <div>
                             <p className="text-xs">
-                                <strong className="block font-medium">Eric Frusciante</strong>
+                                <strong className="block font-medium">{LoggedInUser?.firstName + " " + LoggedInUser?.lastName}</strong>
 
-                                <span> eric@frusciante.com </span>
+                                <span>{LoggedInUser?.email}</span>
                             </p>
                         </div>
                     </a>
