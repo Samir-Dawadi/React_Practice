@@ -12,6 +12,9 @@ import ResetPassword from "../pages/auth/PasswordReset"
 import UserDetail from "../pages/Admin/user/UserDetail"
 import { Suspense } from "react"
 import PermissionCheck from "./PermissionCheck"
+import UserDashboard from "../pages/user/UserDashboard"
+import UserProfile from "../pages/user/UserProfile"
+import UserLayout from "../pages/Layouts/UserLayout"
 // import Loading from "../components/ui/Loading/Loading"
 
 // import AdminDahboard from "../pages/Admin/Dashboard"
@@ -29,10 +32,10 @@ const routeData = createBrowserRouter([
         element:
             (
 
-                <Suspense fallback={<>Skeleton</>}>
+                <Suspense fallback={<>Skeleton</>}>         //fallback le component load hunu vanda paila k load garni vanera dekhauca
                     <PermissionCheck allowedRole="admin">
                         <AdminLayout />
-                    </PermissionCheck>                                 //fallback le component load hunu vanda paila k load garni vanera dekhauca
+                    </PermissionCheck>
                 </Suspense >
 
                 // <Suspense fallback={<Loading />}>                                    //fallback le component load hunu vanda paila k load garni vanera dekhauca
@@ -49,6 +52,24 @@ const routeData = createBrowserRouter([
 
         ]
     },
+
+    {
+        path: "/user",
+
+        element:
+            <PermissionCheck allowedRole="user">
+                <UserLayout />
+            </PermissionCheck>
+        ,
+
+        children: [
+            { index: true, element: <UserDashboard /> },
+            { path: "profile", element: <UserProfile /> },
+        ]
+    },
+
+
+
     { path: "*", element: <NotFound /> }
 ])
 
