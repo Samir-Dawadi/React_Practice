@@ -11,6 +11,7 @@ import UserRegistration from "../pages/Admin/user/UserRegister"
 import ResetPassword from "../pages/auth/PasswordReset"
 import UserDetail from "../pages/Admin/user/UserDetail"
 import { Suspense } from "react"
+import PermissionCheck from "./PermissionCheck"
 // import Loading from "../components/ui/Loading/Loading"
 
 // import AdminDahboard from "../pages/Admin/Dashboard"
@@ -28,8 +29,10 @@ const routeData = createBrowserRouter([
         element:
             (
 
-                <Suspense fallback={<>Skeleton</>}>                                    //fallback le component load hunu vanda paila k load garni vanera dekhauca
-                    <AdminLayout />
+                <Suspense fallback={<>Skeleton</>}>
+                    <PermissionCheck allowedRole="admin">
+                        <AdminLayout />
+                    </PermissionCheck>                                 //fallback le component load hunu vanda paila k load garni vanera dekhauca
                 </Suspense >
 
                 // <Suspense fallback={<Loading />}>                                    //fallback le component load hunu vanda paila k load garni vanera dekhauca
