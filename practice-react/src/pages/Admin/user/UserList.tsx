@@ -1,7 +1,8 @@
 import { NavLink } from "react-router";
 import { H2 } from "../../../components/ui/typography/PageTitle";
-import { LuChevronLeft, LuChevronRight, LuPen, LuPlus } from "react-icons/lu";
+import { LuChevronLeft, LuChevronRight, LuPlus } from "react-icons/lu";
 import ShowComponent from "../../../components/auth/AllowAccess";
+import { RowSkeleton } from "../../../components/ui/table/Skeleton";
 
 export default function UserList() {
     return (
@@ -46,20 +47,12 @@ export default function UserList() {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td className="p-2 border-r border-gray-500 border">User Name</td>
-                            <td className="p-2 border-r border-gray-500 border-b">
-                                user@user.com
-                            </td>
-                            <td className="p-2 border-r border-gray-500 border-b">Admin</td>
-                            <td className="p-2 border-r border-gray-500 border-b">Active</td>
-                            <td className="p-2 border-r border-gray-500 border-b">
-                                <NavLink className={""} to={"/admin/user/123"}>
-                                    <LuPen />
-                                </NavLink>
-                            </td>
-                        </tr>
 
+
+
+                        <RowSkeleton rows={5} cols={5} showAction={true}></RowSkeleton>
+                        {/* <tr>
+                        </tr>
                         <tr>
                             <td className="p-2 border-r border-gray-500 border">User Name</td>
                             <td className="p-2 border-r border-gray-500 border-b">
@@ -94,7 +87,7 @@ export default function UserList() {
                             <td className="p-2 border-r border-gray-500 border-b">
                                 Edit / Delete
                             </td>
-                        </tr>
+                        </tr> */}
                     </tbody>
                 </table>
             </div>
