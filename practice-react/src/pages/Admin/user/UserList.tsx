@@ -1,6 +1,7 @@
 import { NavLink } from "react-router";
 import { H2 } from "../../../components/ui/typography/PageTitle";
 import { LuChevronLeft, LuChevronRight, LuPen, LuPlus } from "react-icons/lu";
+import ShowComponent from "../../../components/auth/AllowAccess";
 
 export default function UserList() {
     return (
@@ -14,15 +15,16 @@ export default function UserList() {
                         className="w-full border border-gray-200 p-2 rounded shadow-lg bg-gray-50"
                         placeholder="Enter your search keyword..."
                     />
-
-                    <NavLink
-                        to="/admin/user/create"
-                        className={
-                            "w-50 bg-emerald-900 p-2 text-white text-center rounded-md transition duration-500 hover:scale-96 flex items-center justify-center gap-2 font-semibold"
-                        }
-                    >
-                        <LuPlus className="size-5" /> Add users
-                    </NavLink>
+                    <ShowComponent role={'admin'}>           //only admin role can see and use the add user buttoon
+                        <NavLink
+                            to="/admin/user/create"
+                            className={
+                                "w-50 bg-emerald-900 p-2 text-white text-center rounded-md transition duration-500 hover:scale-96 flex items-center justify-center gap-2 font-semibold"
+                            }
+                        >
+                            <LuPlus className="size-5" /> Add users
+                        </NavLink>
+                    </ShowComponent>
                 </div>
             </div>
 

@@ -1,5 +1,6 @@
 import { NavLink } from "react-router";
 import type { IUserDetail } from "../../auth/Auth.contract";
+import ShowComponent from "../../auth/AllowAccess";
 
 export const AdminSidebar = ({ LoggedInUser }: Readonly<{ LoggedInUser: IUserDetail }>) => {
     return (
@@ -7,7 +8,8 @@ export const AdminSidebar = ({ LoggedInUser }: Readonly<{ LoggedInUser: IUserDet
             <div className="flex h-[95vh] flex-col justify-between border-e border-gray-100 bg-white">
                 <div className="p-4">
                     <ul className="space-y-1">
-                        {LoggedInUser && LoggedInUser.role === "admin" ? (
+
+                        <ShowComponent role={'admin'}>                    //only admin role can access dashboard
                             <li>
                                 <NavLink
                                     to="/admin"
@@ -17,9 +19,20 @@ export const AdminSidebar = ({ LoggedInUser }: Readonly<{ LoggedInUser: IUserDet
                                     Dashboard
                                 </NavLink>
                             </li>
-                        ) : (
-                            <></>
-                        )}
+                        </ShowComponent>
+
+
+                        <ShowComponent role={'admin'}>
+                            <li>
+                                <NavLink
+                                    to="/admin/users"
+                                    className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
+                                >
+                                    Users
+                                </NavLink>
+                            </li>
+
+                        </ShowComponent>
 
                         <li>
                             <NavLink
@@ -39,14 +52,7 @@ export const AdminSidebar = ({ LoggedInUser }: Readonly<{ LoggedInUser: IUserDet
                             </NavLink>
                         </li>
 
-                        <li>
-                            <NavLink
-                                to="/admin/users"
-                                className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
-                            >
-                                Users
-                            </NavLink>
-                        </li>
+
 
                         <li>
                             <NavLink
