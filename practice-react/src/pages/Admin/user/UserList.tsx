@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import axiosInstance from "../../../config/ApiClient";
 import type { IUserDetail } from "../../../components/auth/Auth.contract";
 import ucFirst from "../../../lib/utilities/helpers";
+import { Badge } from "../../../components/ui/badge/badge";
 
 
 export interface IUserListResponse {
@@ -31,7 +32,7 @@ export default function UserList() {
     const [loading, setLoading] = useState<boolean>(true);
     const [users, setUsers] = useState<Array<IUserDetail> | null>(null);
     const [pagination, setPagination] = useState<IPaginationType>({
-        limit: 5,
+        limit: 10,
         total: 0,
         skip: 0,
         totalNoOFPages: 1
@@ -134,7 +135,12 @@ export default function UserList() {
                                                     </a>
                                                 </td>
                                                 <td className="p-2 border-r border-gray-500 border-b">
-                                                    {ucFirst(users.role)}
+                                                    <Badge type={users.role === "admin" ? "success" :
+                                                        users.role === "moderator" ? "warning" :
+                                                            users.role === "user" ? "info" : "warning"
+                                                    }>
+                                                        {ucFirst(users.role)}
+                                                    </Badge>
                                                 </td>
                                                 <td className="p-2 border-r border-gray-500 border-b">
                                                     {ucFirst(users.gender)}
