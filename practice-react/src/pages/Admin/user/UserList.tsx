@@ -1,6 +1,6 @@
 import { NavLink } from "react-router";
 import { H2 } from "../../../components/ui/typography/PageTitle";
-import { LuChevronLeft, LuChevronRight, LuPen, LuPlus } from "react-icons/lu";
+import { LuChevronLeft, LuChevronRight, LuPen, LuPlus, LuTrash } from "react-icons/lu";
 import ShowComponent from "../../../components/auth/AllowAccess";
 import { RowSkeleton } from "../../../components/ui/table/Skeleton";
 import { useEffect, useState } from "react";
@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import axiosInstance from "../../../config/ApiClient";
 import type { IUserDetail } from "../../../components/auth/Auth.contract";
 import ucFirst from "../../../lib/utilities/helpers";
-import { Badge } from "../../../components/ui/badge/badge";
+import { Badge } from "../../../components/ui/badge/Badge";
 
 
 export interface IUserListResponse {
@@ -146,9 +146,14 @@ export default function UserList() {
                                                     {ucFirst(users.gender)}
                                                 </td>
                                                 <td className="p-2 border-r border-gray-500 border-b">
-                                                    <NavLink className={""} to={"/admin/user/xyz"}>
-                                                        <LuPen />
-                                                    </NavLink>
+                                                    <div className="flex gap-3 items-center justify-center">
+                                                        <NavLink className={"size-7 flex justify-center items-center text-white bg-green-700 hover:scale-110 hover:bg-green-900 rounded-full "} to={"/admin/user/xyz"}>
+                                                            <LuPen />
+                                                        </NavLink>
+                                                        <NavLink className={"size-7 flex justify-center items-center text-white bg-red-700 hover:scale-110 hover:bg-red-900 rounded-full"} to={"/admin/user/xyz"}>
+                                                            <LuTrash />
+                                                        </NavLink>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         )
