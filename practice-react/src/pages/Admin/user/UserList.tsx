@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import axiosInstance from "../../../config/ApiClient";
 import type { IUserDetail } from "../../../components/auth/Auth.contract";
+import ucFirst from "../../../lib/utilities/helpers";
 
 
 export interface IUserListResponse {
@@ -128,13 +129,13 @@ export default function UserList() {
                                                     </div>
                                                 </td>
                                                 <td className="p-2 border-r border-gray-500 border-b">
-                                                    {`${users.email}`}
+                                                    {users.email}
                                                 </td>
                                                 <td className="p-2 border-r border-gray-500 border-b">
-                                                    {`${users.role}`}
+                                                    {ucFirst(users.role)}
                                                 </td>
                                                 <td className="p-2 border-r border-gray-500 border-b">
-                                                    {`${users.gender}`}
+                                                    {ucFirst(users.gender)}
                                                 </td>
                                                 <td className="p-2 border-r border-gray-500 border-b">
                                                     <NavLink className={""} to={"/admin/user/xyz"}>
