@@ -18,7 +18,8 @@ export const RowSkeleton = ({ rows = 7, cols, showAction = true }: Readonly<{
                         <div className="size-7 bg-gray-300 rounded-full animate-pulse"></div>
                         <div className="size-7 bg-gray-300 rounded-full animate-pulse"></div>
                     </div>
-                </td> : <></>}
+                </td> : <></>
+            }
         </tr>
     ));
 }
