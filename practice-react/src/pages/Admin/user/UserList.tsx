@@ -129,7 +129,9 @@ export default function UserList() {
                                                     </div>
                                                 </td>
                                                 <td className="p-2 border-r border-gray-500 border-b">
-                                                    {users.email}
+                                                    <a href={`mailto:${users.email}`} className="text-teal-600 underline">
+                                                        {users.email}
+                                                    </a>
                                                 </td>
                                                 <td className="p-2 border-r border-gray-500 border-b">
                                                     {ucFirst(users.role)}
