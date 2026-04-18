@@ -22,7 +22,8 @@ export interface IPaginationType {
     limit: number,
     total: number,
     skip: number,
-    totalNoOFPages: number
+    totalNoOFPages: number,
+    currentPage?: number
 }
 
 export default function UserList() {
@@ -35,11 +36,12 @@ export default function UserList() {
         limit: 10,
         total: 0,
         skip: 0,
-        totalNoOFPages: 1
+        totalNoOFPages: 1,
+        currentPage: 1
     })
 
     // data fetch garni func
-    const getAllUsers = async (limit = pagination.limit, skip = pagination.skip) => {
+    const getAllUsers = async (limit = pagination.limit, skip = pagination.skip, page = 1) => {
         try {
             const response = await axiosInstance.get('/users', {    //config -> {} vitra parameter pathauni in params obj 
                 params: {
@@ -53,6 +55,7 @@ export default function UserList() {
             // console.log(response)
             setUsers(response.users)
             setPagination({
+                currentPage: page,
                 limit: +response.limit,
                 skip: +response.limit,
                 total: +response.total,
@@ -66,6 +69,16 @@ export default function UserList() {
         finally {
             setLoading(false)                   //helps to show the list of user in the table , without this the skeleton will only load in the user list table
         }
+    }
+
+    const handleNextPageChange = async (page = 1) => {
+        const skip = (page - 1) * (pagination.limit)         //for 1 -> (1-1)*(10) //for 2 -> 2-1 * 10
+        setLoading(true)
+        setPagination({
+            ...pagination,
+        })
+        await getAllUsers(pagination.limit, skip, page)
+
     }
 
 
@@ -210,7 +223,12 @@ export default function UserList() {
 
                     {
                         [...Array(pagination.totalNoOFPages)].map((_, i: number) => (         //page number dekhauna lagako loop ..
-                            <li className={`size-7 cursor-pointer hover:bg-teal-50 hover:text-teal-600 items-center justify-center flex rounded-full shadow  ${i === 0 ? "bg-teal-100" : "bg-gray-100"}`}>
+                            <li className={`size-7 cursor-pointer hover:bg-teal-50 hover:text-teal-600 items-center justify-center flex rounded-full shadow  
+                                ${(i + 1) === pagination.currentPage ? "bg-teal-100" : "bg-gray-100"}`}
+                                onClick={() => {
+                                    handleNextPageChange(i + 1)
+                                }}
+                            >
                                 {i + 1}
                             </li>
                         ))
