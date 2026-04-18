@@ -3,7 +3,7 @@ import { H2 } from "../../../components/ui/typography/PageTitle";
 import { LuChevronLeft, LuChevronRight, LuPen, LuPlus, LuTrash } from "react-icons/lu";
 import ShowComponent from "../../../components/auth/AllowAccess";
 import { RowSkeleton } from "../../../components/ui/table/Skeleton";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 import axiosInstance from "../../../config/ApiClient";
 import type { IUserDetail } from "../../../components/auth/Auth.contract";
@@ -42,7 +42,7 @@ export default function UserList() {
     })
 
     // data fetch garni func
-    const getAllUsers = async (limit = pagination.limit, skip = pagination.skip, page = 1) => {
+    const getAllUsers = useCallback(async (limit = pagination.limit, skip = pagination.skip, page = 1) => {
         try {
             const response = await axiosInstance.get('/users', {    //config -> {} vitra parameter pathauni in params obj 
                 params: {
@@ -70,9 +70,9 @@ export default function UserList() {
         finally {
             setLoading(false)                   //helps to show the list of user in the table , without this the skeleton will only load in the user list table
         }
-    }
+    }, [])
 
-    const searchUsers = async (search = '') => {
+    const searchUsers = useCallback(async (search = '') => {
         try {
             const response = await axiosInstance.get('/users/search', {
                 params: {
@@ -95,7 +95,7 @@ export default function UserList() {
         finally {
             setLoading(false)                   //helps to show the list of user in the table , without this the skeleton will only load in the user list table
         }
-    }
+    }, [])
 
     const handleNextPageChange = async (page = 1) => {
         const skip = (page - 1) * (pagination.limit)         //for 1 -> (1-1)*(10) //for 2 -> 2-1 * 10
@@ -116,12 +116,18 @@ export default function UserList() {
         }, 500)
 
         return () => clearTimeout(timeout)
-    }, [keyword])
+    }, [keyword, searchUsers])
 
 
     useEffect(() => {
-        getAllUsers()               //component render vayesi matra call garni
-    }, [])
+
+        const handleGetAllUsers = async () => {
+            await getAllUsers
+        }
+        return () => {
+            handleGetAllUsers()
+        }
+    }, [getAllUsers])
     return (
         <section className="bg-white w-full p-5">
             {/*page header */}
