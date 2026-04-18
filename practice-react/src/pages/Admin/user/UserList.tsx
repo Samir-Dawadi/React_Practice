@@ -207,15 +207,15 @@ export default function UserList() {
                     <li className="size-7 cursor-pointer hover:bg-teal-50 hover:text-teal-600 bg-gray-100 items-center justify-center flex rounded-full shadow">
                         <LuChevronLeft />
                     </li>
-                    <li className="size-7 cursor-pointer hover:bg-teal-50 hover:text-teal-600 items-center justify-center flex rounded-full shadow bg-teal-100">
-                        1
-                    </li>
-                    <li className="size-7 cursor-pointer hover:bg-teal-50 hover:text-teal-600 bg-gray-100 items-center justify-center flex rounded-full shadow">
-                        <span>2</span>
-                    </li>
-                    <li className="size-7 cursor-pointer hover:bg-teal-50 hover:text-teal-600 bg-gray-100 items-center justify-center flex rounded-full shadow">
-                        <span>3</span>
-                    </li>
+
+                    {
+                        [...Array(pagination.totalNoOFPages)].map((_, i: number) => (         //page number dekhauna lagako loop ..
+                            <li className={`size-7 cursor-pointer hover:bg-teal-50 hover:text-teal-600 items-center justify-center flex rounded-full shadow  ${i === 0 ? "bg-teal-100" : "bg-gray-100"}`}>
+                                {i + 1}
+                            </li>
+                        ))
+                    }
+
                     <li className="size-7 cursor-pointer hover:bg-teal-50 hover:text-teal-600 bg-gray-100 items-center justify-center flex rounded-full shadow">
                         <LuChevronRight />
                     </li>
