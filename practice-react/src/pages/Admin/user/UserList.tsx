@@ -30,6 +30,7 @@ export default function UserList() {
 
 
     {/* listing manage */ }
+    const [keyword, setkyeword] = useState<string>()
     const [loading, setLoading] = useState<boolean>(true);
     const [users, setUsers] = useState<Array<IUserDetail> | null>(null);
     const [pagination, setPagination] = useState<IPaginationType>({
@@ -71,6 +72,31 @@ export default function UserList() {
         }
     }
 
+    const searchUsers = async (search = '') => {
+        try {
+            const response = await axiosInstance.get('/users/search', {
+                params: {
+                    q: search
+                }
+            }) as IUserListResponse
+            // console.log(response)
+            setUsers(response.users)
+            setPagination({
+                currentPage: 1,
+                limit: +response.limit,
+                skip: +response.limit,
+                total: +response.total,
+                totalNoOFPages: Math.ceil(+response.total / pagination.limit)
+            })
+
+        } catch {
+            toast.error("Error while fetching user list")
+        }
+        finally {
+            setLoading(false)                   //helps to show the list of user in the table , without this the skeleton will only load in the user list table
+        }
+    }
+
     const handleNextPageChange = async (page = 1) => {
         const skip = (page - 1) * (pagination.limit)         //for 1 -> (1-1)*(10) //for 2 -> 2-1 * 10
         setLoading(true)
@@ -80,6 +106,17 @@ export default function UserList() {
         await getAllUsers(pagination.limit, skip, page)
 
     }
+
+    useEffect(() => {
+        //debounce
+        const timeout = setTimeout(() => {
+            if (keyword !== undefined) {
+                searchUsers(keyword);
+            }
+        }, 500)
+
+        return () => clearTimeout(timeout)
+    }, [keyword])
 
 
     useEffect(() => {
@@ -93,6 +130,9 @@ export default function UserList() {
                 <div className="w-1/3 flex gap-3">
                     <input
                         type="search"
+                        onChange={(e) => {
+                            setkyeword(e.target.value)
+                        }}
                         className="w-full border border-gray-200 p-2 rounded shadow-lg bg-gray-50"
                         placeholder="Enter your search keyword..."
                     />
