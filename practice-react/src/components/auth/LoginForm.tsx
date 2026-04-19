@@ -8,6 +8,7 @@ import { CancelButton, SubmitButton } from "../ui/button/Button"
 
 import { NavLink, useNavigate } from "react-router"
 import { useAuth } from "../../lib/hooks/useAuth"
+import { toast } from "sonner"
 
 export default function LoginForm() {
     const router = useNavigate()
@@ -67,9 +68,13 @@ export default function LoginForm() {
         try {
             const loggedInUser = (await login(credentials)) as IUserDetail
             router("/" + loggedInUser.role)
+            toast.success("Login Success for " + loggedInUser.firstName)
 
         } catch (exception) {
             console.log(exception)
+            toast.error("Error Logged in ....", {
+                description: "Either your username or password is incorrect"
+            })
         }
     }
 
