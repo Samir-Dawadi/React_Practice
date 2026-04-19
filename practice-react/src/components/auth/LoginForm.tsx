@@ -23,7 +23,7 @@ export default function LoginForm() {
     //other also available as : zustand , jotai , tanstack query (api state)
 
 
-    const { control, handleSubmit, formState: { errors } } = useForm<ICredentials>({   //control->for controlled component(eg form that can be edited/cannot be edited like chatgpt ma afno detail / name edit garna milni , default value haru edit garna milni)
+    const { control, handleSubmit, formState: { errors, isSubmitting } } = useForm<ICredentials>({   //control->for controlled component(eg form that can be edited/cannot be edited like chatgpt ma afno detail / name edit garna milni , default value haru edit garna milni)
         defaultValues: {
             username: "",
             password: ""
@@ -211,8 +211,15 @@ export default function LoginForm() {
                 <button type="submit" className="rounded-md cursor-pointer transition hover:scale-98 hover:bg-teal-700 w-full bg-teal-800 text-white flex items-center justify-center p-2">
                     Submit
                 </button> */}
-                <CancelButton>Reset</CancelButton>
-                <SubmitButton>Submit</SubmitButton>
+                <CancelButton
+                    disabled={isSubmitting}
+                    className={`${"disabled:bg-red-900/20 disabled:cursor-not-allowed"}`}
+                >
+                    Reset</CancelButton>
+                <SubmitButton
+                    disabled={isSubmitting}
+                    className={`${"disabled:bg-teal-900/20 disabled:cursor-not-allowed"}`}
+                >Submit</SubmitButton>
             </div>
         </form>
     )
