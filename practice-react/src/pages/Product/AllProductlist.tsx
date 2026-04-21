@@ -1,10 +1,7 @@
-// import { NavLink } from "react-router";
-// import { NavLink } from "react-router";
+
 import { H1 } from "../../components/ui/typography/PageTitle";
 import { useState } from "react";
 import SingleProductGridItem from "../../components/products/SingleProductGridItem";
-// import { LuFullscreen } from "react-icons/lu";
-
 
 export interface IProductDetail {
     id: number,
@@ -13,7 +10,7 @@ export interface IProductDetail {
 
 
 
-export default function ProductLayout() {
+export default function AllProductList() {
 
     const [allProducts, setAllProducts] = useState<Array<IProductDetail>>()
     return <>
@@ -25,7 +22,7 @@ export default function ProductLayout() {
                         return <SingleProductGridItem detail={product} key={index} />
                     })
                 }
-            </div> 
+            </div>
 
         </section>
 
