@@ -12,7 +12,5 @@ export default function RightSidePanel({ pagetitle, children }: Readonly<{ paget
             {children}
 
         </div>
-
-
     )
 }

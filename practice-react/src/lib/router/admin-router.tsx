@@ -13,14 +13,12 @@ export const AdminRoute = [
         path: "/admin",
         element:
             (
-
                 <Suspense fallback={<Loading />}>         //fallback le component load hunu vanda paila k load garni vanera dekhauca
                     <PermissionCheck allowedRole="admin">
                         <AdminLayout />
                     </PermissionCheck>
                 </Suspense >
-
-                // <Suspense fallback={<Loading />}>                                    //fallback le component load hunu vanda paila k load garni vanera dekhauca
+                // <Suspense fallback={<Loading />}>        //fallback le component load hunu vanda paila k load garni vanera dekhauca
                 //     <AdminLayout />
                 // </Suspense >
             )
@@ -32,8 +30,6 @@ export const AdminRoute = [
             { path: "user/:username/detail", element: <UserDetail /> },
             { path: "user/:id", element: <>User Edit form display</> },
             { path: "*", element: <NotFound /> }
-
-
         ]
     }
 ]

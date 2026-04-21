@@ -70,6 +70,7 @@ export default function AdminLayout() {
                         (LoggedInUser.role === "admin") ? <AdminSidebar /> : <></>
                     } */}
 
+                    {/* <AdminSidebar LoggedInUser={authUser} /> */}
                     <AdminSidebar LoggedInUser={authUser} />
 
                     <section className="w-full bg-gray-200 p-3 mt-3 rounded-md">

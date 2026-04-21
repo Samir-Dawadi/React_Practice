@@ -27,7 +27,6 @@ export default function AuthProvider({ children }: Readonly<{ children: ReactNod
         }
     }
 
-
     const login = async (credentials: ICredentials): Promise<IUserDetail | void> => {
         try {
             const response = await axiosInstance.post('auth/login', {
@@ -57,6 +56,7 @@ export default function AuthProvider({ children }: Readonly<{ children: ReactNod
                 getloggedInUser()
             } else {
                 setauthloading(false)
+
             }
         }
     }, [])

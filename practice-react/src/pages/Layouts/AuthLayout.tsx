@@ -1,6 +1,6 @@
 import { Outlet, useNavigate } from "react-router";
 // import Logo from "../../components/Logo/logo";
-import { H1 } from "../../components/ui/typography/PageTitle";
+// import { H1 } from "../../components/ui/typography/PageTitle";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../lib/hooks/useAuth";
 import LeftSidePanel from "../../components/auth/LeftSidePanel";
