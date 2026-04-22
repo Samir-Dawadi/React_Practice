@@ -6,9 +6,9 @@ import { Outlet } from "react-router"
 export const ProductLayout = () => {
     return (
         <>
-            <header></header>
+            <header>layout header</header>
             <Outlet />
-            <footer></footer>
+            <footer>layout footer</footer>
         </>
     )
 }

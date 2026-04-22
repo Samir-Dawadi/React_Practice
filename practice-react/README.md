@@ -296,3 +296,16 @@ function App() {
   - Code Splitting 
 
   - AdminLayout -> Page -> AdminDashboard -> Template -> Header, sidebar, footer, KPI -> HeaderTitle => Molecule => <h1>(atom)
+
+
+
+
+
+
+ 
+ allProducts && allProducts.map((product: IProductDetail, index: number) => {                         
+                        return <SingleProductGridItem detail={product} key={index} />
+                    })  
+
+allProducts && allProducts.map....:
+                    //YEDI ALLpRODUCTS XA VANI MAP GARNI TESLAI , Map ko pailo arg call back func ani jun repeat garni ho teslai chai hamle return garxam tesma , ani loop ko pailo item ma chai jaile pani key vanni property hunai parxa 

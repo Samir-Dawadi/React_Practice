@@ -1,21 +1,24 @@
-import SingleProductGridItem from "../../components/products/SingleProductGridItem"
-import { H1 } from "../../components/ui/typography/PageTitle"
+import { H2 } from "../../components/ui/typography/PageTitle";
+// import { SingleProductGridItem } from "../../components/products/SingleProductGridItem";
 
 export default function ProductDetail() {
-    return (
-        <>
-
-            Poduct detail
-
-            related products
-
-            <section className=" max-w-7xl mx-auto flex flex-col gap-5">
-                <H1>Product Lists</H1>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 ">
-                    <SingleProductGridItem />
-                </div>
-            </section>
-
-        </>
-    )
+  // slug id 
+  return (
+    <>
+      Product Detail Related Products
+      <section className="flex max-w-7xl mx-auto p-5 flex-col g-5">
+        <H2>Related Product</H2>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+          {/* <SingleProductGridItem />
+          <SingleProductGridItem />
+          <SingleProductGridItem />
+          <SingleProductGridItem />
+          <SingleProductGridItem />
+          <SingleProductGridItem />
+          <SingleProductGridItem />
+          <SingleProductGridItem /> */}
+        </div>
+      </section>
+    </>
+  );
 }
