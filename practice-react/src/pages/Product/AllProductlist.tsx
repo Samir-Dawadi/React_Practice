@@ -60,6 +60,8 @@ export default function AllProductList() {
     };
     // API integration 
     useEffect(() => {
+
+        //getAllProducts({ limit: 40, skip: 0 })           before we can directly call this in react but now we have to do by assigning it into a variable and make it async and return it 
         const handleFunc = async () => {
             await getAllProducts({ limit: 40, skip: 0 });
         }
@@ -73,9 +75,9 @@ export default function AllProductList() {
                 <H1>Product List</H1>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 py-5">
                     {loading
-                        ? <ProductGridSkeleton size={12} />
+                        ? <ProductGridSkeleton size={12} />                 //kati wota skeleton dekhauni page load huda..
                         : allProducts &&
-                        allProducts.map((product: IProductDetail, index: number) => {
+                        allProducts.map((product: IProductDetail, index: number) => {       
                             return <SingleProductGridItem detail={product} key={index} />;
                         })}
                 </div>

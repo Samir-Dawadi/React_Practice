@@ -8,13 +8,19 @@ import AuthProvider from './context/provider/AuthProvider'
 import { Toaster } from 'sonner'
 // import HomePage from './pages/Home/HomePage.module'
 
+import { Provider } from "react-redux"
+import store from './config/store'
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     {/* <HomePage /> */}
     {/* <ForgetPassword /> */}
-    <AuthProvider>              //now AuthProvider provides the data to the RouterConfig(where our whole application runs)
-      <Toaster richColors closeButton />
-      <RouterConfig />
+    <AuthProvider>
+      <Provider store={store}>
+               //now AuthProvider provides the data to the RouterConfig(where our whole application runs)
+        <Toaster richColors closeButton />
+        <RouterConfig />
+      </Provider>
     </AuthProvider>
   </StrictMode>
 )

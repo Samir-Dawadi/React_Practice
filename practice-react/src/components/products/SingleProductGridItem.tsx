@@ -35,14 +35,24 @@ export const SingleProductGridItem = ({ detail }: Readonly<{ detail: IProductDet
                         }
 
                     </p>
+                    <div className="flex gap-3">
+                        <NavLink
+                        to={"/product-list/" + detail.id}
+                        className={
+                            "w-full bg-blue-600 text-white flex items-center rounded-md justify-center py-2 transition hover:cursor-pointer hover:scale-103"
+                        }
+                    >
+                        Buy Now
+                    </NavLink>
                     <NavLink
                         to={"/product-list/" + detail.id}
                         className={
                             "w-full bg-orange-800 text-white flex items-center rounded-md justify-center py-2 transition hover:cursor-pointer hover:scale-103"
                         }
                     >
-                        Buy Now
+                        Add to Cart
                     </NavLink>
+                    </div>
                 </div>
             </div>
         </>
