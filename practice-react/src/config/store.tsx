@@ -5,7 +5,7 @@ const store = configureStore({
     reducer: {
         cart: CartReducer
     }
-})
+}) 
 
 
 //dispatch type

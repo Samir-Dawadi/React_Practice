@@ -13,4 +13,4 @@ const CartSlicer = createSlice({
 
 })
 export const { hello } = CartSlicer.actions
-export default CartSlicer.reducer     
+export default CartSlicer.reducer      
