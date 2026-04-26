@@ -12,12 +12,9 @@ import { Provider } from "react-redux"
 import store from './config/store'
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    {/* <HomePage /> */}
-    {/* <ForgetPassword /> */}
+  <StrictMode>       //now AuthProvider provides the data to the RouterConfig(where our whole application runs)
     <AuthProvider>
       <Provider store={store}>
-               //now AuthProvider provides the data to the RouterConfig(where our whole application runs)
         <Toaster richColors closeButton />
         <RouterConfig />
       </Provider>

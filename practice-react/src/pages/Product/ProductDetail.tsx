@@ -17,6 +17,7 @@ export default function ProductDetail() {
           <SingleProductGridItem />
           <SingleProductGridItem />
           <SingleProductGridItem /> */}
+        
         </div>
       </section>
     </>

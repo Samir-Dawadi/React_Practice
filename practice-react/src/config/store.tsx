@@ -7,7 +7,6 @@ const store = configureStore({
     }
 }) 
 
-
 //dispatch type
 export type AppDispatch = typeof store.dispatch;
 
