@@ -5,6 +5,7 @@ const CartSlicer = createSlice({
     initialState: {
         cartDetail:null
     } as {cartDetail:null | Array<{productId:number , quantity:number}>} ,
+    
     reducers: {
         hello:()=>{
              
