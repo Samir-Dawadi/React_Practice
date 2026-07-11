@@ -7,6 +7,7 @@ import UserDetail from "../../pages/Admin/user/UserDetail"
 import UserList from "../../pages/Admin/user/UserList"
 import UserRegister from "../../pages/Admin/user/UserRegister"
 import NotFound from "../../pages/error/NotFound"
+import CategoryList from "../../pages/Admin/category/Categorylist"
 
 export const AdminRoute = [
     {
@@ -29,6 +30,7 @@ export const AdminRoute = [
             { path: "user/create", element: <UserRegister /> },
             { path: "user/:username/detail", element: <UserDetail /> },
             { path: "user/:id", element: <>User Edit form display</> },
+            { path: "categories", element: <CategoryList/> },
             { path: "*", element: <NotFound /> }
         ]
     }

@@ -13,7 +13,25 @@ import ucFirst from "../../../lib/utilities/helpers";
 import { Badge } from "../../../components/ui/badge/Badge";
 
 // type definition 
-export interface IUserListResponse { limit: number, skip: number, total: number, users: Array<IUserDetail> }
+export interface IUserListResponse {
+    limit: number,
+    skip: number,
+    total: number,
+    users: Array<IUserDetail>
+}
+export interface IUserListResponseCustom {
+    data: Array<IUserDetail>;
+    message: string;
+    meta: {
+        pagination: {
+            limit: number;
+            skip: number;
+            total: number;
+            page: number;
+            totalPage: number
+        };
+    };
+}
 export interface IPaginationType { limit: number, skip: number, total: number, totalNoOfPages: number, currentPage?: number }
 
 export default function UserList() {
@@ -32,7 +50,7 @@ export default function UserList() {
 
     // data fetch 
     const getAllUsers = useCallback(
-        async (limit = pagination.limit, skip = pagination.skip, page = 1) => {
+        async (limit = pagination.limit, skip = pagination.skip) => {
             try {
                 const response = (await axiosInstance.get("/users", {
                     params: {
@@ -40,15 +58,15 @@ export default function UserList() {
                         skip: skip,
                         select: "id,firstName,lastName,email,role,gender,address,image",
                     },
-                })) as IUserListResponse;
+                })) as IUserListResponseCustom;
 
-                setUsers(response.users);
+                setUsers(response.data);
                 setPagintaion({
-                    currentPage: page,
-                    limit: +response.limit,
-                    skip: +response.limit,
-                    total: +response.total,
-                    totalNoOfPages: Math.ceil(+response.total / +response.limit),
+                    currentPage: +response.meta.pagination.page,
+                    limit: +response.meta.pagination.limit,
+                    skip: +response.meta.pagination.limit,
+                    total: +response.meta.pagination.total,
+                    totalNoOfPages: +response.meta.pagination.totalPage,
                 });
             } catch (exception) {
                 console.log(exception);
@@ -60,16 +78,17 @@ export default function UserList() {
 
     const searchUsers = useCallback(async (search = "") => {
         try {
-            const response = (await axiosInstance.get("/users/search", {
+            const response = (await axiosInstance.get("/users", {
                 params: { q: search },
-            })) as IUserListResponse;
-            setUsers(response.users);
+            })) as IUserListResponseCustom;
+
+            setUsers(response.data);
             setPagintaion({
-                currentPage: 1,
-                limit: +response.limit,
-                skip: +response.limit,
-                total: +response.total,
-                totalNoOfPages: Math.ceil(+response.total / +response.limit),
+                currentPage: +response.meta.pagination.page,
+                limit: +response.meta.pagination.limit,
+                skip: +response.meta.pagination.limit,
+                total: +response.meta.pagination.total,
+                totalNoOfPages: +response.meta.pagination.totalPage,
             });
         } catch {
             toast.error("Error fetching user list");
@@ -97,7 +116,7 @@ export default function UserList() {
         setPagintaion({
             ...pagination
         })
-        await getAllUsers(pagination.limit, skip, page)
+        await getAllUsers(pagination.limit, skip)
     }
 
 
@@ -193,10 +212,11 @@ export default function UserList() {
                                         <td className="p-2 border-r border-gray-500 border">
                                             <div className="flex gap-3 items-center w-full">
                                                 <img
-                                                    src={user.image}
+                                                    crossOrigin="anonymous"
+                                                    src={user.image?.url}
                                                     className="size-7 rounded-full bg-gray-50"
                                                 />
-                                                {`${user.firstName} ${user.lastName}`}
+                                                {user.name}
                                             </div>
                                         </td>
                                         <td className="p-2 border-r border-gray-500 border-b">
@@ -240,8 +260,8 @@ export default function UserList() {
                                                         "size-10 text-white flex items-center justify-center rounded-full hover:bg-red-900 transition hover:scale-102 bg-red-800"
                                                     }
                                                     onClick={(e) => {
-                                                        e.preventDefault()
-                                                        handleDeleteConfirm(user.id as number)
+                                                        e.preventDefault();
+                                                        handleDeleteConfirm(user.id as number);
                                                     }}
                                                     to={"/admin/user/123"}
                                                 >

@@ -36,6 +36,13 @@ export const AdminSidebar = ({ LoggedInUser }: Readonly<{ LoggedInUser: IUserDet
 
                         <li>
                             <NavLink
+                                to={"/admin/categories"}
+                                className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
+                            >Categories</NavLink>
+                        </li>
+
+                        <li>
+                            <NavLink
                                 to="/admin/food-items"
                                 className="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
                             >
@@ -139,7 +146,7 @@ export const AdminSidebar = ({ LoggedInUser }: Readonly<{ LoggedInUser: IUserDet
                     >
                         <img
                             alt=""
-                            src={LoggedInUser?.image}
+                            src={LoggedInUser?.image?.url}
                             className="size-10 rounded-full object-cover"
                         />
 

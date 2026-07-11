@@ -3,6 +3,7 @@ import Logo from "../../components/Logo/logo";
 import { Outlet } from "react-router";
 import { AdminSidebar } from "../../components/ui/sidebar/AdminSidebar";
 import { useAuth } from "../../lib/hooks/useAuth";
+import type { IUserDetail } from "../../components/auth/Auth.contract";
 
 export default function AdminLayout() {
     // const LoggedInUser = {
@@ -71,7 +72,7 @@ export default function AdminLayout() {
                     } */}
 
                     {/* <AdminSidebar LoggedInUser={authUser} /> */}
-                    <AdminSidebar LoggedInUser={authUser} />
+                    <AdminSidebar LoggedInUser={authUser as IUserDetail} />
 
                     <section className="w-full bg-gray-200 p-3 mt-3 rounded-md">
                         <Outlet />

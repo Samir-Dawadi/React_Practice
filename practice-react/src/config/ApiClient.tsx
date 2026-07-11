@@ -19,6 +19,8 @@ const axiosInstance = axios.create({
         // Tell server we are sending JSON data
         "Content-Type": "application/json"
     }
+
+
 })
 
 
@@ -28,6 +30,7 @@ axiosInstance.interceptors.request.use((config) => {
     //console.log("i am in req interceptor")
     //Get authentication token from cookies, Used to identify logged-in user
     const token = Cookies.get("Auth_Key_61")
+    console.log("Token from cookie:", token);
 
     if (token) {       //Check if token exists
         //Add token to request header,Required for protected/private APIs
@@ -60,3 +63,12 @@ axiosInstance.interceptors.response.use(    //use two parameter ->success and fa
 
 
 export default axiosInstance
+
+
+
+
+
+
+
+
+

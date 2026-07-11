@@ -41,6 +41,9 @@ export const SingleProductGridItem = ({ detail }: Readonly<{ detail: IProductDet
                         className={
                             "w-full bg-blue-600 text-white flex items-center rounded-md justify-center py-2 transition hover:cursor-pointer hover:scale-103"
                         }
+                        onClick={(e)=>{
+                            e.preventDefault()
+                        }}
                     >
                         Buy Now
                     </NavLink>

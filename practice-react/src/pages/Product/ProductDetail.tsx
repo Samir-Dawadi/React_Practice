@@ -9,14 +9,7 @@ export default function ProductDetail() {
       <section className="flex max-w-7xl mx-auto p-5 flex-col g-5">
         <H2>Related Product</H2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          {/* <SingleProductGridItem />
-          <SingleProductGridItem />
-          <SingleProductGridItem />
-          <SingleProductGridItem />
-          <SingleProductGridItem />
-          <SingleProductGridItem />
-          <SingleProductGridItem />
-          <SingleProductGridItem /> */}
+          
         </div>
       </section>
     </>
